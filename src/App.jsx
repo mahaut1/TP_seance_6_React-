@@ -20,12 +20,22 @@ export default function App() {
 
     setTaches((precedentes) => [...precedentes, nouvelleTache]);
   }
+  
+  function basculerTache(id) {
+  setTaches((precedentes) =>
+    precedentes.map((tache) =>
+      tache.id === id
+        ? { ...tache, terminee: !tache.terminee }
+        : tache
+    )
+  );
+}
 
   return (
     <main className="application">
       <h1>Mes tâches</h1>
       <TaskForm onAjouter={ajouterTache} />
-      <TaskList taches={taches} />
+     <TaskList taches={taches} onBasculer={basculerTache} />
     </main>
   );
 }
