@@ -10,6 +10,9 @@ const tachesInitiales = [
 
 export default function App() {
   const [taches, setTaches] = useState(tachesInitiales);
+  const tachesRestantes = taches.filter(
+    (tache) => !tache.terminee
+  );
 
   function ajouterTache(texte) {
     const nouvelleTache = {
@@ -20,22 +23,25 @@ export default function App() {
 
     setTaches((precedentes) => [...precedentes, nouvelleTache]);
   }
-  
+
   function basculerTache(id) {
-  setTaches((precedentes) =>
-    precedentes.map((tache) =>
-      tache.id === id
-        ? { ...tache, terminee: !tache.terminee }
-        : tache
-    )
-  );
-}
+    setTaches((precedentes) =>
+      precedentes.map((tache) =>
+        tache.id === id
+          ? { ...tache, terminee: !tache.terminee }
+          : tache
+      )
+    );
+  }
 
   return (
     <main className="application">
       <h1>Mes tâches</h1>
+      <p>
+        {tachesRestantes.length} tâches restantes sur {taches.length}
+      </p>
       <TaskForm onAjouter={ajouterTache} />
-     <TaskList taches={taches} onBasculer={basculerTache} />
+      <TaskList taches={taches} onBasculer={basculerTache} />
     </main>
   );
 }
