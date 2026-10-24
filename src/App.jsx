@@ -10,6 +10,7 @@ const tachesInitiales = [
 
 export default function App() {
   const [taches, setTaches] = useState(tachesInitiales);
+  const [filtre, setFiltre] = useState("toutes");
   const tachesRestantes = taches.filter(
     (tache) => !tache.terminee
   );
@@ -34,6 +35,18 @@ export default function App() {
     );
   }
 
+  const tachesFiltrees = taches.filter((tache) => {
+    if (filtre === "actives") {
+      return !tache.terminee;
+    }
+
+    if (filtre === "terminees") {
+      return tache.terminee;
+    }
+
+    return true;
+  });
+
   return (
     <main className="application">
       <h1>Mes tâches</h1>
@@ -41,7 +54,32 @@ export default function App() {
         {tachesRestantes.length} tâches restantes sur {taches.length}
       </p>
       <TaskForm onAjouter={ajouterTache} />
-      <TaskList taches={taches} onBasculer={basculerTache} />
+      <div className="filtres">
+        <button
+          type="button"
+          className={filtre === "toutes" ? "actif" : ""}
+          onClick={() => setFiltre("toutes")}
+        >
+          Toutes
+        </button>
+
+        <button
+          type="button"
+          className={filtre === "actives" ? "actif" : ""}
+          onClick={() => setFiltre("actives")}
+        >
+          À faire
+        </button>
+
+        <button
+          type="button"
+          className={filtre === "terminees" ? "actif" : ""}
+          onClick={() => setFiltre("terminees")}
+        >
+          Terminées
+        </button>
+      </div>
+      <TaskList taches={tachesFiltrees} onBasculer={basculerTache} />
     </main>
   );
 }

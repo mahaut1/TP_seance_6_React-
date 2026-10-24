@@ -60,3 +60,28 @@ button {
   list-style: none;
   padding-left: 0;
 }
+
+.filtres {
+  display: flex;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.filtres button {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: white;
+  color: #17332d;
+  cursor: pointer;
+}
+
+.filtres button:hover {
+  background-color: #e8f3f0;
+}
+
+.filtres button.actif {
+  background-color: #116b5b;
+  color: white;
+  border-color: #116b5b;
+}
