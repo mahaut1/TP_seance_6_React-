@@ -1,7 +1,7 @@
-export default function TaskItem({ tache, onBasculer }) {
+export default function TaskItem({ tache, onBasculer, onSupprimer }) {
   return (
-    <li>
-     <label>
+    <li className="element-tache">
+      <label>
         <input
           type="checkbox"
           checked={tache.terminee}
@@ -15,6 +15,13 @@ export default function TaskItem({ tache, onBasculer }) {
           {tache.texte}
         </span>
       </label>
+      <button
+        type="button"
+        className="bouton-supprimer"
+        onClick={() => onSupprimer(tache.id)}
+      >
+        Supprimer
+      </button>
     </li>
   );
 }

@@ -35,6 +35,11 @@ export default function App() {
     );
   }
 
+  function supprimerTache(id) {
+  setTaches((precedentes) =>
+    precedentes.filter((tache) => tache.id !== id)
+  );
+}
   const tachesFiltrees = taches.filter((tache) => {
     if (filtre === "actives") {
       return !tache.terminee;
@@ -79,7 +84,10 @@ export default function App() {
           Terminées
         </button>
       </div>
-      <TaskList taches={tachesFiltrees} onBasculer={basculerTache} />
+      <TaskList 
+      taches={tachesFiltrees}
+       onBasculer={basculerTache}
+       onSupprimer={supprimerTache} />
     </main>
   );
 }

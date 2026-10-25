@@ -26,7 +26,7 @@ form label {
   display: flex;
   gap: 0.6rem;
 }
-input {
+.ligne-formulaire input {
   flex: 1;
   min-width: 0;
   padding: 0.75rem;
@@ -47,19 +47,18 @@ button {
   color: #b42318;
 }
 .liste-taches {
-  padding-left: 1.5rem;
-  line-height: 2.2;
+  list-style: none;
+  padding: 0;
+  margin-top: 16px;
 }
+
 @media (max-width: 600px) {
   .application {
     margin: 1rem;
     padding: 1.25rem;
   }
 }
-.liste-taches {
-  list-style: none;
-  padding-left: 0;
-}
+
 
 .filtres {
   display: flex;
@@ -84,4 +83,41 @@ button {
   background-color: #116b5b;
   color: white;
   border-color: #116b5b;
+}
+
+.element-tache {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.element-tache label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.element-tache input[type="checkbox"] {
+  flex: none;
+  margin: 0;
+}
+
+.bouton-supprimer {
+  flex-shrink: 0;
+  background-color: #b42318;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.bouton-supprimer:hover {
+  background-color: #912018;
 }
