@@ -76,7 +76,7 @@ export default function App() {
       <p>
         {tachesRestantes.length} tâches restantes sur {taches.length}
       </p>
-      <TaskForm onAjouter={ajouterTache} />
+      <TaskForm onAjouter={ajouterTache} taches={taches} />
       <div className="filtres">
         <button
           type="button"
