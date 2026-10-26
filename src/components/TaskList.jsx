@@ -1,6 +1,6 @@
 import TaskItem from "./TaskItem.jsx";
 
-export default function TaskList({ taches, onBasculer, onSupprimer }) {
+export default function TaskList({ taches, onBasculer, onSupprimer, onModifier }) {
   return (
     <ul className="liste-taches">
        {taches.map((tache) => (
@@ -9,6 +9,7 @@ export default function TaskList({ taches, onBasculer, onSupprimer }) {
          tache={tache}
         onBasculer={onBasculer}
         onSupprimer={onSupprimer}
+        onModifier={onModifier}
           />
       ))}
     </ul>

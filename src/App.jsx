@@ -1,4 +1,4 @@
-import {useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import TaskForm from "./components/TaskForm.jsx";
 import TaskList from "./components/TaskList.jsx";
 
@@ -9,16 +9,16 @@ const tachesInitiales = [
 ];
 
 export default function App() {
-const [taches, setTaches] = useState(() => {
-  const sauvegarde = localStorage.getItem("mes-taches");
+  const [taches, setTaches] = useState(() => {
+    const sauvegarde = localStorage.getItem("mes-taches");
 
-  return sauvegarde ? JSON.parse(sauvegarde) : tachesInitiales;
-});  
-useEffect(() => {
-  localStorage.setItem("mes-taches", JSON.stringify(taches));
-}, [taches]);
+    return sauvegarde ? JSON.parse(sauvegarde) : tachesInitiales;
+  });
+  useEffect(() => {
+    localStorage.setItem("mes-taches", JSON.stringify(taches));
+  }, [taches]);
 
-const [filtre, setFiltre] = useState("toutes");
+  const [filtre, setFiltre] = useState("toutes");
   const tachesRestantes = taches.filter(
     (tache) => !tache.terminee
   );
@@ -44,10 +44,20 @@ const [filtre, setFiltre] = useState("toutes");
   }
 
   function supprimerTache(id) {
-  setTaches((precedentes) =>
-    precedentes.filter((tache) => tache.id !== id)
-  );
-}
+    setTaches((precedentes) =>
+      precedentes.filter((tache) => tache.id !== id)
+    );
+  }
+
+  function modifierTache(id, nouveauTexte) {
+    setTaches((precedentes) =>
+      precedentes.map((tache) =>
+        tache.id === id
+          ? { ...tache, texte: nouveauTexte }
+          : tache
+      )
+    );
+  }
   const tachesFiltrees = taches.filter((tache) => {
     if (filtre === "actives") {
       return !tache.terminee;
@@ -92,10 +102,11 @@ const [filtre, setFiltre] = useState("toutes");
           Terminées
         </button>
       </div>
-      <TaskList 
-      taches={tachesFiltrees}
-       onBasculer={basculerTache}
-       onSupprimer={supprimerTache} />
+      <TaskList
+        taches={tachesFiltrees}
+        onBasculer={basculerTache}
+        onSupprimer={supprimerTache}
+        onModifier={modifierTache} />
     </main>
   );
 }
