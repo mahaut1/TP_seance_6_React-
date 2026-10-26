@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useEffect, useState } from "react";
 import TaskForm from "./components/TaskForm.jsx";
 import TaskList from "./components/TaskList.jsx";
 
@@ -9,8 +9,16 @@ const tachesInitiales = [
 ];
 
 export default function App() {
-  const [taches, setTaches] = useState(tachesInitiales);
-  const [filtre, setFiltre] = useState("toutes");
+const [taches, setTaches] = useState(() => {
+  const sauvegarde = localStorage.getItem("mes-taches");
+
+  return sauvegarde ? JSON.parse(sauvegarde) : tachesInitiales;
+});  
+useEffect(() => {
+  localStorage.setItem("mes-taches", JSON.stringify(taches));
+}, [taches]);
+
+const [filtre, setFiltre] = useState("toutes");
   const tachesRestantes = taches.filter(
     (tache) => !tache.terminee
   );
